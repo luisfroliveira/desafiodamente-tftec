@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ShopTFTEC.Admin.Services;
-using ShopTFTEC.WebApp.Areas.Admin.Models;
 using ShopTFTEC.WebApp.Context;
 using ShopTFTEC.WebApp.Policies;
 using ShopTFTEC.WebApp.Services;
@@ -23,11 +22,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
           .AddEntityFrameworkStores<AppDbContext>()
           .AddDefaultTokenProviders();
-
-builder.Services.Configure<ConfigurationImagens>(options =>
-{
-    options.NomePastaImagensProdutos = builder.Configuration["ConfigurationPastaImagens:NomePastaImagensProdutos"];
-});
 
 builder.Services.AddHttpClient<IProductService, ProductService>("ProductApi", c =>
 {

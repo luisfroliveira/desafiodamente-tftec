@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTFTEC.API", "ShopTFTEC.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTFTEC.WebApp", "ShopTFTEC.WebApp\ShopTFTEC.WebApp.csproj", "{CD77CB02-B8E8-4793-8A54-9F498A7F2BBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopTFTEC.Admin", "ShopTFTEC.Admin\ShopTFTEC.Admin.csproj", "{8DD3053E-1BBF-4D0B-A7DF-CDB4096931FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CD77CB02-B8E8-4793-8A54-9F498A7F2BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD77CB02-B8E8-4793-8A54-9F498A7F2BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD77CB02-B8E8-4793-8A54-9F498A7F2BBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DD3053E-1BBF-4D0B-A7DF-CDB4096931FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DD3053E-1BBF-4D0B-A7DF-CDB4096931FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DD3053E-1BBF-4D0B-A7DF-CDB4096931FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DD3053E-1BBF-4D0B-A7DF-CDB4096931FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

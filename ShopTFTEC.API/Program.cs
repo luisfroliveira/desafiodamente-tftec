@@ -1,14 +1,15 @@
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ShopTFTEC.API.Context;
 using ShopTFTEC.API.Repositories;
 using ShopTFTEC.API.Services;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 // Add services to the container.
 builder.Services.AddControllers()
@@ -24,32 +25,32 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "ShopTFTEC.API", Version = "v1" });
-    //c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    //{
-    //    Description = @"'Bearer' [space] seu token",
-    //    Name = "Authorization",
-    //    In = ParameterLocation.Header,
-    //    Type = SecuritySchemeType.ApiKey,
-    //    Scheme = "Bearer"
-    //});
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = @"'Bearer' [space] seu token",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
 
-    //c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    //{
-    //     {
-    //        new OpenApiSecurityScheme
-    //        {
-    //           Reference = new OpenApiReference
-    //           {
-    //              Type = ReferenceType.SecurityScheme,
-    //              Id = "Bearer"
-    //           },
-    //           Scheme = "oauth2",
-    //           Name = "Bearer",
-    //           In= ParameterLocation.Header
-    //        },
-    //        new List<string> ()
-    //     }
-    //});
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+         {
+            new OpenApiSecurityScheme
+            {
+               Reference = new OpenApiReference
+               {
+                  Type = ReferenceType.SecurityScheme,
+                  Id = "Bearer"
+               },
+               Scheme = "oauth2",
+               Name = "Bearer",
+               In= ParameterLocation.Header
+            },
+            new List<string> ()
+         }
+    });
 });
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -73,19 +74,20 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
-//builder.Services.AddAuthentication("Bearer")
-//       .AddJwtBearer("Bearer", options =>
-//       {
-//           options.Authority =
-//             builder.Configuration["ShopTFTEC.Admin:ApplicationUrl"];
 
-//           options.RequireHttpsMetadata = false;
+builder.Services.AddAuthentication("Bearer")
+       .AddJwtBearer("Bearer", options =>
+       {
+           options.Authority = builder.Configuration["AzureAd:ApplicationUrl"];
+           options.Audience = builder.Configuration["AzureAd:Audience"];
+           options.SaveToken = true;
+       });
 
-//           options.TokenValidationParameters = new TokenValidationParameters
-//           {
-//               ValidateAudience = false
-//           };
-//       });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireUserAdminGerenteRole",
+         policy => policy.RequireRole("Cliente", "Admin", "Gerente"));
+});
 
 var app = builder.Build();
 

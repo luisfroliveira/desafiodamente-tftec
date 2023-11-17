@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using ShopTFTEC.WebApp.Areas.Admin.Models;
 using ShopTFTEC.WebApp.Context;
 using ShopTFTEC.WebApp.Models;
 using System.IdentityModel.Tokens.Jwt;

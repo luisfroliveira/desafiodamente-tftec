@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShopTFTEC.API.DTOs;
 using ShopTFTEC.API.Repositories;
 
@@ -59,6 +60,7 @@ public class CartController : ControllerBase
     }
 
     [HttpGet("getcart/{userid}")]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<CartDTO>> GetByUserId(string userid)
     {
         var cartDto = await _repository.GetCartByUserIdAsync(userid);
