@@ -100,6 +100,7 @@
 
   <ItemGroup>
     <Folder Include="keys\" />
+    <Folder Include="wwwroot\images\produtos\" />
   </ItemGroup>
 
 </Project>

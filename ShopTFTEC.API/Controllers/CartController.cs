@@ -60,7 +60,6 @@ public class CartController : ControllerBase
     }
 
     [HttpGet("getcart/{userid}")]
-    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<CartDTO>> GetByUserId(string userid)
     {
         var cartDto = await _repository.GetCartByUserIdAsync(userid);
@@ -83,6 +82,11 @@ public class CartController : ControllerBase
         return Ok(cart);
     }
 
+    /// <summary>
+    /// Atualiza o carrinho
+    /// </summary>
+    /// <param name="cartDto"></param>
+    /// <returns></returns>
     [HttpPut("updatecart")]
     public async Task<ActionResult<CartDTO>> UpdateCart(CartDTO cartDto)
     {
